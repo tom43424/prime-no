@@ -1,43 +1,237 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 <body>
+    //Prime Number
     <script>
         function isPrime(number) {
   if (number <= 1) {
     return false; // Numbers less than or equal to 1 are not prime
   }
-  
   if (number <= 3) {
     return true; // 2 and 3 are prime numbers
   }
-  
   if (number % 2 === 0 || number % 3 === 0) {
     return false; // Numbers divisible by 2 or 3 are not prime
   }
-  
   // Check divisibility for numbers of the form 6k ± 1
   for (let i = 5; i * i <= number; i += 6) {
     if (number % i === 0 || number % (i + 2) === 0) {
       return false;
     }
   }
-  
   return true;
 }
-
 const numToCheck = 8;
 if (isPrime(numToCheck)) {
   console.log(numToCheck + " is a prime number.");
 } else {
   console.log(numToCheck + " is not a prime number.");
 }
+    </script>
 
+    
+ //Largest no in an array
+    <script>
+        function findLargestNumber(arr) {
+  let largest = arr[0]; // Assume the first element is the largest
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > largest) {
+      largest = arr[i];
+    }
+  }
+  return largest;
+}
+const numbers = [64, 34, 25, 12, 89, 90, 56];
+const largestNumber = findLargestNumber(numbers);
+console.log("The largest number is:", largestNumber); // Output: "The largest number is: 90"
+    </script>
+    
+    // 2nd latgest no in array
+    <script>
+        function findSecondLargest(arr) {
+  if (arr.length < 2) {
+    return "Array should have at least two elements.";
+  }
+  let largest = arr[0];
+  let secondLargest = arr[1];
+  if (secondLargest > largest) {
+    [largest, secondLargest] = [secondLargest, largest];
+  }
+  for (let i = 2; i < arr.length; i++) {
+    if (arr[i] > largest) {
+      secondLargest = largest;
+      largest = arr[i];
+    } else if (arr[i] > secondLargest && arr[i] !== largest) {
+      secondLargest = arr[i];
+    }
+  }
+  return secondLargest;
+}
+const numbers = [64, 34, 25, 12, 99, 90, 56];
+const secondLargestNumber = findSecondLargest(numbers);
+console.log("The second largest number is:", secondLargestNumber); 
+    </script>
+
+    
+    // Binary Search
+    <script>
+        function binarySearch(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] === target) {
+      return mid; // Element found, return its index
+    } else if (arr[mid] < target) {
+      left = mid + 1; // Search the right half
+    } else {
+      right = mid - 1; // Search the left half
+    }
+  }
+  return -1; // Element not found
+}
+const sortedArray = [11, 12, 22, 25, 34, 64, 90];
+const targetElement = 25;
+const index = binarySearch(sortedArray, targetElement);
+if (index !== -1) {
+  console.log(targetElement + " found at index " + index);
+} else {
+  console.log(targetElement + " not found in the array");
+}
+    </script>
+
+    //Bubblesort
+    <script>
+        function bubbleSort(arr) {
+  const len = arr.length;
+  for (let i = 0; i < len - 1; i++) {
+    for (let j = 0; j < len - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        // Swap elements
+        const temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
+}
+const unsortedArray = [64, 34, 25, 12, 22, 11, 90];
+const sortedArray = bubbleSort(unsortedArray);
+console.log(sortedArray); // Output: [11, 12, 22, 25, 34, 64, 90]
+    </script>
+
+    // SelectionSort
+      <script>
+        function selectionSort(arr) {
+  const len = arr.length;
+  for (let i = 0; i < len - 1; i++) {
+    let minIndex = i;
+    // Find the index of the minimum element in the unsorted part of the array
+    for (let j = i + 1; j < len; j++) {
+      if (arr[j] < arr[minIndex]) {
+        minIndex = j;
+      }
+    }
+    // Swap the minimum element with the first element in the unsorted part
+    if (minIndex !== i) {
+      const temp = arr[i];
+      arr[i] = arr[minIndex];
+      arr[minIndex] = temp;
+    }
+  }
+  return arr;
+}
+const unsortedArray = [64, 34, 25, 12, 22, 11, 90];
+const sortedArray = selectionSort(unsortedArray);
+console.log(sortedArray); // Output: [11, 12, 22, 25, 34, 64, 90]
+    </script>
+
+    //Character Occurrences in a string
+    <script>
+        function countOccurrences(str, char) {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str.charAt(i) === char) {
+      count++;
+    }
+  }
+  return count;
+}
+const inputString = "Hello, how are you?";
+const characterToCount = "o";
+const occurrences = countOccurrences(inputString, characterToCount);
+console.log("The character '" + characterToCount + "' appears " + occurrences + " times.");
+    </script>
+
+    //Fibonacci Series
+    <script>
+    function fibonacciSeries(n) {
+      const series = [0, 1];
+      for (let i = 2; i < n; i++) {
+        const nextValue = series[i - 1] + series[i - 2];
+        series.push(nextValue);
+      }
+      return series;
+    }
+    const seriesLength = 10; // Change this to the desired length
+    const generatedSeries = fibonacciSeries(seriesLength);
+    console.log(generatedSeries);
+  </script>
+
+    //Leap Year or not
+       <script>
+    function isLeapYear(year) {
+  if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+    return true; // It's a leap year
+  } else {
+    return false; // It's not a leap year
+  }
+}
+const yearToCheck = 2025;
+if (isLeapYear(yearToCheck)) {
+  console.log(yearToCheck + " is a leap year.");
+} else {
+  console.log(yearToCheck + " is not a leap year.");
+}
+   </script>
+
+    //Pallindrome number
+    <script>
+        function isPalindrome(str) {
+  const cleanStr = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, ''); // Clean and convert to lowercase
+  const reversedStr = cleanStr.split('').reverse().join('');
+  return cleanStr === reversedStr;
+}
+const inputString = "bananna";
+if (isPalindrome(inputString)) {
+  console.log("'" + inputString + "' is a palindrome.");
+} else {
+  console.log("'" + inputString + "' is not a palindrome.");
+}
+    </script>
+
+    //Reverse a given string
+    <script>
+        function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+const inputString = "Hello, World!";
+const reversedString = reverseString(inputString);
+console.log(reversedString); // Output: "!dlroW ,olleH"
+    </script>
+
+    //Sum of elements in an array
+    <script>
+        function arraySum(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  } 
+  return sum;
+}
+const numbers = [2,2,2,2,2];
+const sum = arraySum(numbers);
+console.log("The sum of the array elements is:", sum); // Output: "The sum of the array elements is: 360"
     </script>
 </body>
 </html>
